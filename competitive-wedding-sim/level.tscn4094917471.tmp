@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt0bta757pek3"]
+
+[ext_resource type="PackedScene" uid="uid://dv78agv3vjl13" path="res://Assets/Characters/character-female-a.glb" id="1_u52ul"]
+[ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://character_control.gd" id="1_vonw3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u52ul"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_u52ul"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.858683, 0.512507, 0, -0.512507, 0.858683, -0.298525, 3.48382, 4.82821)
+size = 8.619
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999347, 0.0361379, 0, -0.0361379, 0.999347, 0.584639, 0, -0.385785)
+script = ExtResource("1_vonw3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.405, 0, 0, 0, 0.405, 8.84721e-10, 0, -8.84721e-10, 0.405, 0, 0.38857, 0.0140513)
+shape = SubResource("CylinderShape3D_u52ul")
+
+[node name="character-female-a2" parent="RigidBody3D" instance=ExtResource("1_u52ul")]
+transform = Transform3D(1, 0, 0, 0, 0.999347, -0.0361379, 0, 0.0361379, 0.999347, 0, 0, 0)
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("WorldBoundaryShape3D_u52ul")
