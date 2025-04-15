@@ -58,10 +58,6 @@ func _on_level_hovered(level_key: String) -> void:
 func _on_level_unhovered() -> void:
 	info_label.text = "Name :\nTime :\nBest Record :"
 
-	
-func _process(delta: float) -> void:
-	pass
-
 func _on_back_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 	
