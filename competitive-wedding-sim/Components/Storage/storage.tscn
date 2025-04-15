@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://clyopj3fbcp8g"]
+
+[ext_resource type="Script" uid="uid://b0r3s3ejahp7x" path="res://Components/Storage/storage.gd" id="1_2o0fx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_toeep"]
+radius = 1.719
+
+[node name="Storage" type="Node3D"]
+script = ExtResource("1_2o0fx")
+
+[node name="InteractZone" type="Area3D" parent="."]
+transform = Transform3D(1.505, 0, 0, 0, 1.505, 0, 0, 0, 1.505, 0, 0, 0)
+collision_layer = 4
+
+[node name="CollisionArea" type="CollisionShape3D" parent="InteractZone"]
+transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 0, 0, 0)
+shape = SubResource("CylinderShape3D_toeep")
+
+[connection signal="body_entered" from="InteractZone" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="InteractZone" to="." method="_on_body_exited"]
