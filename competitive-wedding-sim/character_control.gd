@@ -34,6 +34,7 @@ func _physics_process(_delta):
 	else:
 		animation_player.play("idle")
 
+
 func _input(event):
 	if event.is_action_pressed("interact_"+str(player_num)):
 		interact_signal.emit(player_num)
