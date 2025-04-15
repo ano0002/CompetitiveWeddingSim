@@ -72,7 +72,6 @@ func _physics_process(_delta):
 func _input(event):
 	if event.is_action_pressed("interact_"+str(player_num)):
 		if can_interact > 0:
-			# Call the interact signal
 			interact_signal.emit(player_num)
 		elif holded != null:
 			drop()

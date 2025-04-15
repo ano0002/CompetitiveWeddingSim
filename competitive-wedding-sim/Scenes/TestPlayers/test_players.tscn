@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bt0bta757pek3"]
+[gd_scene load_steps=18 format=3 uid="uid://bt0bta757pek3"]
 
 [ext_resource type="Script" uid="uid://cyt36c33aqg8o" path="res://Scenes/TestPlayers/test_players.gd" id="1_w8fwf"]
 [ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://Components/TaskManager/task_manager.tscn" id="2_syl7w"]
 [ext_resource type="PackedScene" uid="uid://crsb80qye44v" path="res://Components/Player/player.tscn" id="3_ftsnx"]
 [ext_resource type="PackedScene" uid="uid://cwd0vvjvmgmf6" path="res://Components/PickupItem/pickup_item.tscn" id="4_70mh7"]
 [ext_resource type="Shader" uid="uid://bouetmump65f5" path="res://Shaders/color_fill.gdshader" id="5_syl7w"]
+[ext_resource type="PackedScene" uid="uid://clyopj3fbcp8g" path="res://Components/Storage/storage.tscn" id="6_ftsnx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
 
@@ -23,6 +24,8 @@ shader_parameter/color = Color(0.794009, 0.38168, 0.600038, 1)
 render_priority = 0
 shader = ExtResource("5_syl7w")
 shader_parameter/color = Color(0, 0.560259, 0.937774, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_70mh7"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_n6hdu"]
 
@@ -99,6 +102,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_70mh7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_syl7w")
+
+[node name="Storage Tests" type="Node" parent="."]
+
+[node name="Storage" parent="Storage Tests" instance=ExtResource("6_ftsnx")]
+transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, -2.6293, 0, -2.74167)
+accepted = Array[String](["Lambda"])
+
+[node name="Model" type="MeshInstance3D" parent="Storage Tests/Storage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("CylinderMesh_70mh7")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.923913, -0.196087, 0.328535, 0, 0.858683, 0.512507, -0.382603, -0.473512, 0.793348, 4.833, 7.798, 10.55)
