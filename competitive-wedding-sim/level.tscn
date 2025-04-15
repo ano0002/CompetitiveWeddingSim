@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bt0bta757pek3"]
+[gd_scene load_steps=21 format=3 uid="uid://bt0bta757pek3"]
 
-[ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://TaskManager.tscn" id="1_1ainy"]
-[ext_resource type="Script" uid="uid://cyt36c33aqg8o" path="res://ScriptTestScene.gd" id="1_n6hdu"]
+[ext_resource type="PackedScene" path="res://TaskManager.tscn" id="1_1ainy"]
+[ext_resource type="Script" path="res://ScriptTestScene.gd" id="1_n6hdu"]
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://character_control.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://be654a1tctso0" path="res://Assets/Characters/character-male-a.glb" id="3_f2txt"]
@@ -37,6 +37,11 @@ scale_min = 0.07
 scale_max = 0.15
 
 [sub_resource type="SphereMesh" id="SphereMesh_km5ld"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n6hdu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_km5ld"]
+albedo_color = Color(0.450277, 0.503171, 0.932233, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
 
@@ -75,7 +80,7 @@ axis_lock_linear_y = true
 script = ExtResource("1_vonw3")
 
 [node name="character_model" parent="Player_1" instance=ExtResource("2_vonw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206766, -0.0312076, 0.0103612)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021, 0, 0.01)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player_1"]
 transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.2, 0)
@@ -88,6 +93,12 @@ lifetime = 0.5
 speed_scale = 0.5
 process_material = SubResource("ParticleProcessMaterial_n6hdu")
 draw_pass_1 = SubResource("SphereMesh_km5ld")
+
+[node name="PickUpDisplay" type="MeshInstance3D" parent="Player_1"]
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0.842057, 0)
+visible = false
+mesh = SubResource("BoxMesh_n6hdu")
+surface_material_override/0 = SubResource("StandardMaterial3D_km5ld")
 
 [node name="Player_2" type="CharacterBody3D" parent="." groups=["players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.997148, -0.0152974, 0.00746489)
@@ -109,6 +120,12 @@ speed_scale = 0.5
 process_material = SubResource("ParticleProcessMaterial_n6hdu")
 draw_pass_1 = SubResource("SphereMesh_km5ld")
 
+[node name="PickUpDisplay" type="MeshInstance3D" parent="Player_2"]
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, 0, 0, 0.21, 0, 0.842057, 0)
+visible = false
+mesh = SubResource("BoxMesh_n6hdu")
+surface_material_override/0 = SubResource("StandardMaterial3D_km5ld")
+
 [node name="Solid" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86575, -0.356169, 1.13774)
 collision_layer = 2
@@ -124,15 +141,15 @@ mesh = SubResource("BoxMesh_vonw3")
 [node name="Interactibles" type="Node" parent="."]
 
 [node name="Interactable" type="Node3D" parent="Interactibles" groups=["interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64005, 0, 0)
+script = ExtResource("5_f2txt")
 
 [node name="Model" type="MeshInstance3D" parent="Interactibles/Interactable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, 0.134229, 1.13774)
 mesh = SubResource("BoxMesh_vonw3")
 skeleton = NodePath("../Solid")
 surface_material_override/0 = SubResource("ShaderMaterial_0b4ue")
 
 [node name="Solid" type="StaticBody3D" parent="Interactibles/Interactable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, -0.356169, 1.13774)
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactibles/Interactable/Solid"]
@@ -141,35 +158,9 @@ shape = SubResource("BoxShape3D_vonw3")
 
 [node name="InteractZone" type="Area3D" parent="Interactibles/Interactable"]
 collision_layer = 4
-script = ExtResource("5_f2txt")
 
 [node name="CollisionArea" type="CollisionShape3D" parent="Interactibles/Interactable/InteractZone"]
-transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 1.38947, 0.48598, 1.13774)
-shape = SubResource("CylinderShape3D_oi3di")
-
-[node name="Interactable2" type="Node3D" parent="Interactibles" groups=["interactables"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.11372, -0.0319419, -3.97534)
-
-[node name="Model" type="MeshInstance3D" parent="Interactibles/Interactable2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, 0.134229, 1.13774)
-mesh = SubResource("BoxMesh_vonw3")
-skeleton = NodePath("../Solid")
-surface_material_override/0 = SubResource("ShaderMaterial_0b4ue")
-
-[node name="Solid" type="StaticBody3D" parent="Interactibles/Interactable2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, -0.356169, 1.13774)
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactibles/Interactable2/Solid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
-shape = SubResource("BoxShape3D_vonw3")
-
-[node name="InteractZone" type="Area3D" parent="Interactibles/Interactable2"]
-collision_layer = 4
-script = ExtResource("5_f2txt")
-
-[node name="CollisionArea" type="CollisionShape3D" parent="Interactibles/Interactable2/InteractZone"]
-transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 1.38947, 0.48598, 1.13774)
+transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 0, 0, 0)
 shape = SubResource("CylinderShape3D_oi3di")
 
 [node name="Orange" type="Sprite3D" parent="."]
@@ -179,4 +170,5 @@ pixel_size = 20.7338
 axis = 1
 texture = SubResource("CanvasTexture_n6hdu")
 
-[connection signal="area_entered" from="Interactibles/Interactable2/InteractZone" to="Interactibles/Interactable2/InteractZone" method="_on_area_entered"]
+[connection signal="body_entered" from="Interactibles/Interactable/InteractZone" to="Interactibles/Interactable" method="_on_body_entered"]
+[connection signal="body_exited" from="Interactibles/Interactable/InteractZone" to="Interactibles/Interactable" method="_on_body_exited"]

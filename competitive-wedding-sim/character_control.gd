@@ -7,11 +7,16 @@ extends CharacterBody3D
 var dash_dir = Vector2(0, 0)
 var is_dashing = 0
 
+var can_interact = 0
+
 signal interact_signal(player_num)
 
 var animation_player : AnimationPlayer
 var particle_generator : GPUParticles3D
 var camera : Camera3D
+var pick_up_display : MeshInstance3D
+
+var holded : Node3D = null
 
 func _init():
 	pass
@@ -23,6 +28,8 @@ func _ready():
 	particle_generator = get_node("ParticleGenerator")
 
 	camera = owner.get_node("Camera3D")
+
+	pick_up_display = get_node("PickUpDisplay")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "idle":
@@ -55,7 +62,33 @@ func _physics_process(_delta):
 
 func _input(event):
 	if event.is_action_pressed("interact_"+str(player_num)):
-		interact_signal.emit(player_num)
+		if can_interact > 0:
+			# Call the interact signal
+			interact_signal.emit(player_num)
+		elif holded != null:
+			drop()
+
 	elif event.is_action_pressed("dash_"+str(player_num)):
 		is_dashing = 5
 		dash_dir = Input.get_vector("move_left_"+str(player_num), "move_right_"+str(player_num), "move_back_"+str(player_num), "move_forward_"+str(player_num)) * speed * dash_mult
+
+func pick_up(body):
+	if holded != null:
+		drop()
+	holded = body
+	print(holded)
+	pick_up_display.show()
+
+
+func drop():
+	holded.dropped(self.position + Vector3(0,0,1).rotated(Vector3(0, 1, 0), rotation.y))
+	holded = null
+	pick_up_display.hide()
+
+func add_interact_zone():
+	can_interact += 1
+
+func remove_interact_zone():
+	can_interact -= 1
+	if can_interact < 0:
+		can_interact = 0
