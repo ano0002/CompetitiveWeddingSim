@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Competitive Wedding Sim"
+config/name="CWS"
 run/main_scene="uid://bt0bta757pek3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
