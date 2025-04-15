@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var item_name: String = "Lambda"
+
 var default_owner = null
 var players_in = []
 
@@ -35,6 +37,10 @@ func dropped(drop_pos):
 	reparent(default_owner)
 	position = drop_pos
 	self.enable()
+
+func stored():
+	self.disable()
+	self.hide()
 
 func enable():
 	get_node("Solid/CollisionShape3D").disabled = false
