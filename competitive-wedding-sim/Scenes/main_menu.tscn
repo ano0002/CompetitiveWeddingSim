@@ -34,6 +34,45 @@ corner_radius_bottom_right = 40
 bg_color = Color(0.929412, 0.878431, 0.815686, 1)
 corner_radius_bottom_right = 40
 
+[sub_resource type="Animation" id="Animation_ce3w2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Control/Label Competitive:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(326, 101)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Control/Label Wedding:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(503, 164)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Control/Label Sim:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(891, 168)]
+}
+
 [sub_resource type="Animation" id="Animation_1ehe0"]
 resource_name = "Title1"
 length = 6.0
@@ -73,45 +112,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(0.574349, 1.86607, 0.535887),
 "update": 0,
 "values": [Vector2(891, 168), Vector2(891, 198), Vector2(891, 168)]
-}
-
-[sub_resource type="Animation" id="Animation_ce3w2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/Control/Label Competitive:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(326, 101)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimationPlayer/Control/Label Wedding:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(503, 164)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimationPlayer/Control/Label Sim:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(891, 168)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n45e2"]
@@ -210,10 +210,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Label Competitive" type="Label" parent="AnimationPlayer/Control"]
+layout_mode = 0
 offset_left = 326.0
-offset_top = 109.769
+offset_top = 101.0
 offset_right = 833.0
-offset_bottom = 205.769
+offset_bottom = 197.0
 rotation = -0.0561569
 theme_override_colors/font_color = Color(0.930632, 0.877757, 0.817075, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -223,10 +224,11 @@ theme_override_font_sizes/font_size = 90
 text = "COMPETITIVE"
 
 [node name="Label Wedding" type="Label" parent="AnimationPlayer/Control"]
+layout_mode = 0
 offset_left = 503.0
-offset_top = 178.148
+offset_top = 164.0
 offset_right = 870.0
-offset_bottom = 274.148
+offset_bottom = 260.0
 rotation = -0.0181021
 theme_override_colors/font_color = Color(0.929412, 0.878431, 0.815686, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -235,10 +237,11 @@ theme_override_font_sizes/font_size = 90
 text = "WEDDING"
 
 [node name="Label Sim" type="Label" parent="AnimationPlayer/Control"]
+layout_mode = 0
 offset_left = 891.0
-offset_top = 179.723
+offset_top = 168.0
 offset_right = 1033.0
-offset_bottom = 289.723
+offset_bottom = 278.0
 rotation = 0.162785
 theme_override_colors/font_color = Color(0.929412, 0.878431, 0.815686, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
