@@ -1,16 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwd0vvjvmgmf6"]
+[gd_scene load_steps=3 format=3 uid="uid://cwd0vvjvmgmf6"]
 
-[ext_resource type="Script" uid="uid://cvorkkstiowek" path="res://Components/PickupItem/interact_zone.gd" id="1_okxu6"]
-[ext_resource type="Shader" uid="uid://bouetmump65f5" path="res://Shaders/color_fill.gdshader" id="2_in7v2"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0b4ue"]
-render_priority = 0
-shader = ExtResource("2_in7v2")
-shader_parameter/color = Color(0.313292, 0.50872, 1, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
+[ext_resource type="Script" uid="uid://cvorkkstiowek" path="res://Components/PickupItem/pickup_item.gd" id="1_okxu6"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_oi3di"]
 radius = 1.719
@@ -18,19 +8,8 @@ radius = 1.719
 [node name="Interactable" type="Node3D" groups=["interactables"]]
 script = ExtResource("1_okxu6")
 
-[node name="Model" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_vonw3")
-skeleton = NodePath("../Solid")
-surface_material_override/0 = SubResource("ShaderMaterial_0b4ue")
-
-[node name="Solid" type="StaticBody3D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Solid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
-shape = SubResource("BoxShape3D_vonw3")
-
 [node name="InteractZone" type="Area3D" parent="."]
+transform = Transform3D(1.505, 0, 0, 0, 1.505, 0, 0, 0, 1.505, 0, 0, 0)
 collision_layer = 4
 
 [node name="CollisionArea" type="CollisionShape3D" parent="InteractZone"]

@@ -13,8 +13,9 @@ signal interact_signal(player_num)
 
 var animation_player : AnimationPlayer
 var particle_generator : GPUParticles3D
+var player_model : Node3D
 var camera : Camera3D = null
-var pick_up_display : MeshInstance3D
+var pick_up_display : Node3D
 
 var holded : Node3D = null
 
@@ -24,7 +25,7 @@ func _init():
 func _ready():
 	if player_num == 2:
 		get_node("character_model/1").hide()
-	var player_model = get_node("character_model/" + str(player_num))
+	player_model = get_node("character_model/" + str(player_num))
 	player_model.show()
 	animation_player = player_model.get_node("AnimationPlayer")
 	animation_player.play("idle")
@@ -59,7 +60,7 @@ func _physics_process(_delta):
 
 	if velocity != Vector3(0,0,0):
 		animation_player.play("sprint")
-		rotation.y = Vector2(velocity.x, -velocity.z).angle()+90
+		player_model.rotation.y = Vector2(velocity.x, -velocity.z).angle()+90
 		particle_generator.set_emitting(true)
 		particle_generator.set_amount_ratio(velocity.length()/(speed*dash_mult))
 
@@ -83,15 +84,13 @@ func _input(event):
 func pick_up(body):
 	if holded != null:
 		drop()
+	body.pick_up(self)
 	holded = body
-	print(holded)
-	pick_up_display.show()
 
 
 func drop():
-	holded.dropped(self.position + Vector3(0,0,1).rotated(Vector3(0, 1, 0), rotation.y))
+	holded.dropped(self.position + Vector3(0,0,0.2).rotated(Vector3(0, 1, 0), rotation.y))
 	holded = null
-	pick_up_display.hide()
 
 func add_interact_zone():
 	can_interact += 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://crsb80qye44v"]
+[gd_scene load_steps=7 format=3 uid="uid://crsb80qye44v"]
 
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://Components/Player/character_control.gd" id="1_6d8je"]
 [ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="2_4qqls"]
@@ -20,23 +20,17 @@ scale_max = 0.15
 radius = 0.25
 height = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_i5ovi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jorlj"]
-albedo_color = Color(0.450277, 0.503171, 0.932233, 1)
-
 [node name="Player" type="CharacterBody3D" groups=["players"]]
 collision_mask = 7
 axis_lock_linear_y = true
 script = ExtResource("1_6d8je")
 
 [node name="character_model" type="Node3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.443086, 0, -0.231679, 0, 0.5, 0, 0.231679, 0, 0.443086, 0, 0, 0)
 
 [node name="1" parent="character_model" instance=ExtResource("3_4qqls")]
 
 [node name="2" parent="character_model" instance=ExtResource("2_4qqls")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021, 0, 0.01)
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -51,8 +45,5 @@ speed_scale = 0.5
 process_material = SubResource("ParticleProcessMaterial_68g04")
 draw_pass_1 = SubResource("SphereMesh_kne5a")
 
-[node name="PickUpDisplay" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 0, 0.460266, 0)
-visible = false
-mesh = SubResource("BoxMesh_i5ovi")
-surface_material_override/0 = SubResource("StandardMaterial3D_jorlj")
+[node name="PickUpDisplay" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460266, 0)
