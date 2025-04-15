@@ -6,23 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cwd0vvjvmgmf6" path="res://Components/PickupItem/pickup_item.tscn" id="4_70mh7"]
 [ext_resource type="Shader" uid="uid://bouetmump65f5" path="res://Shaders/color_fill.gdshader" id="5_syl7w"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oi3di"]
-sky_top_color = Color(0.86, 0.7482, 0.77615, 1)
-sky_horizon_color = Color(1.05407, 1.01837, 1.01636, 1)
-ground_horizon_color = Color(1.05407, 1.01837, 1.01636, 1)
-energy_multiplier = 0.8
-
-[sub_resource type="Sky" id="Sky_0b4ue"]
-sky_material = SubResource("ProceduralSkyMaterial_oi3di")
-
-[sub_resource type="Environment" id="Environment_f2txt"]
-background_mode = 2
-sky = SubResource("Sky_0b4ue")
-ambient_light_sky_contribution = 0.5
-ambient_light_energy = 0.85
-tonemap_mode = 2
-glow_enabled = true
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
@@ -43,22 +26,27 @@ shader_parameter/color = Color(0, 0.560259, 0.937774, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_n6hdu"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oi3di"]
+sky_top_color = Color(0.86, 0.7482, 0.77615, 1)
+sky_horizon_color = Color(1.05407, 1.01837, 1.01636, 1)
+ground_horizon_color = Color(1.05407, 1.01837, 1.01636, 1)
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_0b4ue"]
+sky_material = SubResource("ProceduralSkyMaterial_oi3di")
+
+[sub_resource type="Environment" id="Environment_f2txt"]
+background_mode = 2
+sky = SubResource("Sky_0b4ue")
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.85
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestPlayers" type="Node3D"]
 script = ExtResource("1_w8fwf")
 
 [node name="TaskManager" parent="." instance=ExtResource("2_syl7w")]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_f2txt")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.923913, -0.196087, 0.328535, 0, 0.858683, 0.512507, -0.382603, -0.473512, 0.793348, 4.833, 7.798, 10.55)
-fov = 36.6044
-size = 8.619
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.893826, 0.448414, 0, -0.448414, 0.893826, 0, 1.226, 1.06178)
-light_energy = 0.677
 
 [node name="Player" parent="." instance=ExtResource("3_ftsnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.635167, 0, 0)
@@ -67,54 +55,68 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.635167, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.704267, 0, 0)
 player_num = 2
 
-[node name="Solid" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86575, -0.356169, 1.13774)
+[node name="Collider Test" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46235, -0.356169, 1.13774)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Solid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collider Test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
 shape = SubResource("BoxShape3D_vonw3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Solid"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Collider Test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.490398, 0)
 mesh = SubResource("BoxMesh_vonw3")
 
-[node name="Interactibles" type="Node" parent="."]
+[node name="Interactible Tests" type="Node" parent="."]
 
-[node name="Interactable" parent="Interactibles" instance=ExtResource("4_70mh7")]
+[node name="Interactable" parent="Interactible Tests" instance=ExtResource("4_70mh7")]
 transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 0.744887, 0, 0.850253)
 
-[node name="Solid" type="StaticBody3D" parent="Interactibles/Interactable"]
+[node name="Solid" type="StaticBody3D" parent="Interactible Tests/Interactable"]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactibles/Interactable/Solid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactible Tests/Interactable/Solid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
 shape = SubResource("BoxShape3D_ftsnx")
 
-[node name="Model" type="MeshInstance3D" parent="Interactibles/Interactable"]
+[node name="Model" type="MeshInstance3D" parent="Interactible Tests/Interactable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_70mh7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_t0ql4")
 
-[node name="Interactable2" parent="Interactibles" instance=ExtResource("4_70mh7")]
+[node name="Interactable2" parent="Interactible Tests" instance=ExtResource("4_70mh7")]
 transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 1.72734, 0, -1.43666)
 
-[node name="Solid" type="StaticBody3D" parent="Interactibles/Interactable2"]
+[node name="Solid" type="StaticBody3D" parent="Interactible Tests/Interactable2"]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactibles/Interactable2/Solid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactible Tests/Interactable2/Solid"]
 shape = SubResource("BoxShape3D_ftsnx")
 
-[node name="Model" type="MeshInstance3D" parent="Interactibles/Interactable2"]
+[node name="Model" type="MeshInstance3D" parent="Interactible Tests/Interactable2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_70mh7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_syl7w")
 
-[node name="Orange" type="Sprite3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.923913, -0.196087, 0.328535, 0, 0.858683, 0.512507, -0.382603, -0.473512, 0.793348, 4.833, 7.798, 10.55)
+fov = 36.6044
+size = 8.619
+
+[node name="WorldSettings" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldSettings"]
+transform = Transform3D(1, 0, 0, 0, 0.893826, 0.448414, 0, -0.448414, 0.893826, 0, 1.226, 1.06178)
+light_energy = 0.677
+
+[node name="Ground" type="Sprite3D" parent="WorldSettings"]
 transform = Transform3D(0.883333, 0, 0, 0, 1, 0, 0, 0, 1.08333, -1.21991, 0, -0.745532)
 modulate = Color(0.941131, 0.711615, 0.513554, 1)
 pixel_size = 20.7338
 axis = 1
 texture = SubResource("CanvasTexture_n6hdu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldSettings"]
+environment = SubResource("Environment_f2txt")
