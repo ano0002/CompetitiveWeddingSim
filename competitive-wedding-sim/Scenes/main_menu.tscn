@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dixvjswa7xe0d"]
+[gd_scene load_steps=11 format=3 uid="uid://cso4se6t4hn8b"]
 
 [ext_resource type="Texture2D" uid="uid://cxyd2cx87jk5d" path="res://background_sunset.jpg" id="1_06t4h"]
-[ext_resource type="Script" uid="uid://dy0d4bcpolroi" path="res://main_menu.gd" id="1_fu7sn"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_fu7sn"]
 [ext_resource type="FontFile" uid="uid://b2w2wrn27nw2o" path="res://font/Cartoon2US-Regular.ttf" id="2_glbon"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7vrkn"]

@@ -1,8 +1,8 @@
 extends CharacterBody3D 
 
-@export var speed = 6.0
+@export var speed = 4.5
 @export var player_num = 1
-@export var dash_mult = 4.0
+@export var dash_mult = 3.5
 
 var dash_dir = Vector2(0, 0)
 var is_dashing = 0
@@ -10,15 +10,16 @@ var is_dashing = 0
 signal interact_signal(player_num)
 
 var animation_player : AnimationPlayer
+var particle_generator : GPUParticles3D
 
 func _init():
 	pass
 
 func _ready():
-
 	animation_player = get_node("character_model/AnimationPlayer")
 	animation_player.play("idle")
-	# Loop the idle animation
+	
+	particle_generator = get_node("ParticleGenerator")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "idle":
@@ -37,10 +38,15 @@ func _physics_process(_delta):
 	velocity = Vector3(temp_vel.x, 0, -temp_vel.y).rotated(Vector3(0, 1, 0), deg_to_rad(camera_rotation_y))
 	move_and_slide()
 	is_dashing = max(is_dashing - 1, 0)
+
 	if velocity != Vector3(0,0,0):
 		animation_player.play("sprint")
 		rotation.y = Vector2(velocity.x, -velocity.z).angle()-90+camera_rotation_y
+		particle_generator.set_emitting(true)
+		particle_generator.set_amount_ratio(velocity.length()/(speed*dash_mult))
+
 	else:
+		particle_generator.set_emitting(false)
 		animation_player.play("idle")
 
 
