@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfgeyq176uxh3"]
 
 [ext_resource type="Texture2D" uid="uid://bpsoxy8ik6bpl" path="res://Assets/UI/final-blocnote3.png" id="1_aknko"]
-[ext_resource type="Script" uid="uid://bhygxnapa1mnv" path="res://Components/TaskManager/TaskManager.gd" id="2_p6h0s"]
+[ext_resource type="Script" uid="uid://bhygxnapa1mnv" path="res://Components/TaskManager/task_manager.gd" id="2_p6h0s"]
 
 [node name="TaskManager" type="Node3D"]
 script = ExtResource("2_p6h0s")

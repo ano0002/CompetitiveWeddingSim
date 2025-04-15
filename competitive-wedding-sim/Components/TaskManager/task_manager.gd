@@ -30,7 +30,7 @@ func set_tasks(new_tasks: Dictionary):
 		# Styling
 		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		label.set("theme_override_fonts/font", load("res://font/Morning Bright.otf"))
+		label.set("theme_override_fonts/font", load("res://Assets/Fonts/Morning Bright.otf"))
 		task_container.add_child(label)
 		task_labels[id] = label
 
