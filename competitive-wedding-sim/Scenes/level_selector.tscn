@@ -1,0 +1,140 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6gjecgfpv73c"]
+
+[ext_resource type="Script" uid="uid://dpne4mlnv6oco" path="res://level_selector.gd" id="1_2db0o"]
+[ext_resource type="Texture2D" uid="uid://d3osebxqp4d5h" path="res://levelselectbackground.jpg" id="1_5xyw6"]
+[ext_resource type="FontFile" uid="uid://b2w2wrn27nw2o" path="res://font/Cartoon2US-Regular.ttf" id="2_2db0o"]
+[ext_resource type="Script" path="res://button_level.gd" id="4_sn3u0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sn3u0"]
+texture = ExtResource("1_5xyw6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sn3u0"]
+bg_color = Color(0.454902, 0.454902, 0.454902, 0.556863)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3o3bh"]
+bg_color = Color(0.846557, 0.842259, 0.840415, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcooo"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_bottom = 15.0
+
+[node name="Level_Selector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2db0o")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sn3u0")
+
+[node name="Label _Select a Level_" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -176.0
+offset_top = 43.0
+offset_right = 176.0
+offset_bottom = 113.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.319255, 0.319255, 0.319255, 1)
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 60
+text = "Select a Level"
+
+[node name="Button Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.0
+offset_top = -279.0
+offset_right = -406.0
+offset_bottom = -218.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.349065, 0.349065, 0.349065, 1)
+theme_override_colors/font_focus_color = Color(0.34902, 0.34902, 0.34902, 1)
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/hover = SubResource("StyleBoxFlat_sn3u0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3o3bh")
+text = "Back"
+
+[node name="Button Level 1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 236.0
+offset_right = 385.0
+offset_bottom = 348.0
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 40
+text = "Level 1"
+script = ExtResource("4_sn3u0")
+
+[node name="Button Level 2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 236.0
+offset_right = 722.0
+offset_bottom = 348.0
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 40
+text = "Level 2"
+script = ExtResource("4_sn3u0")
+
+[node name="Button Level 3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 774.0
+offset_top = 236.0
+offset_right = 1060.0
+offset_bottom = 348.0
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 40
+text = "Level 3"
+script = ExtResource("4_sn3u0")
+
+[node name="Label Level Info" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 437.0
+offset_right = 541.0
+offset_bottom = 566.0
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_gcooo")
+text = "Name :
+Time :
+Best Record :"
+
+[connection signal="ready" from="Label _Select a Level_" to="." method="_on_label__select_a_level__ready"]
+[connection signal="pressed" from="Button Back" to="." method="_on_back_pressed"]
+[connection signal="mouse_entered" from="Button Level 1" to="Button Level 1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Button Level 1" to="Button Level 1" method="_on_mouse_exited"]
+[connection signal="pressed" from="Button Level 1" to="." method="_on_button_level_1_pressed"]
+[connection signal="mouse_entered" from="Button Level 2" to="Button Level 2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Button Level 2" to="Button Level 2" method="_on_mouse_exited"]
+[connection signal="pressed" from="Button Level 2" to="." method="_on_button_level_2_pressed"]
+[connection signal="mouse_entered" from="Button Level 3" to="Button Level 3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Button Level 3" to="Button Level 3" method="_on_mouse_exited"]
+[connection signal="pressed" from="Button Level 3" to="." method="_on_button_level_3_pressed"]
