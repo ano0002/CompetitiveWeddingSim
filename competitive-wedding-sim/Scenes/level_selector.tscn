@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6gjecgfpv73c"]
+[gd_scene load_steps=14 format=3 uid="uid://b6gjecgfpv73c"]
 
 [ext_resource type="Script" uid="uid://dpne4mlnv6oco" path="res://level_selector.gd" id="1_2db0o"]
 [ext_resource type="Texture2D" uid="uid://d3osebxqp4d5h" path="res://levelselectbackground.jpg" id="1_5xyw6"]
@@ -29,6 +29,44 @@ content_margin_left = 15.0
 content_margin_top = 15.0
 content_margin_bottom = 15.0
 
+[sub_resource type="Animation" id="Animation_g3msu"]
+resource_name = "Level_Select_Anim"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9, 5.93333),
+"transitions": PackedFloat32Array(1.62451, 1.7411, 1.51572),
+"update": 0,
+"values": [Vector2(380, 43), Vector2(420, 43), Vector2(380, 43)]
+}
+
+[sub_resource type="Animation" id="Animation_oef0k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(400, 43)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2h1o8"]
+_data = {
+&"Level_Select_Anim": SubResource("Animation_g3msu"),
+&"RESET": SubResource("Animation_oef0k")
+}
+
 [node name="Level_Selector" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -46,21 +84,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_sn3u0")
-
-[node name="Label _Select a Level_" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -176.0
-offset_top = 43.0
-offset_right = 176.0
-offset_bottom = 113.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.319255, 0.319255, 0.319255, 1)
-theme_override_fonts/font = ExtResource("2_2db0o")
-theme_override_font_sizes/font_size = 60
-text = "Select a Level"
 
 [node name="Button Back" type="Button" parent="."]
 layout_mode = 1
@@ -130,7 +153,27 @@ text = "Name :
 Time :
 Best Record :"
 
-[connection signal="ready" from="Label _Select a Level_" to="." method="_on_label__select_a_level__ready"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("Label _Select a Level_")
+libraries = {
+&"": SubResource("AnimationLibrary_2h1o8")
+}
+autoplay = "Level_Select_Anim"
+
+[node name="Label _Select a Level_" type="Label" parent="AnimationPlayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -176.0
+offset_top = 43.0
+offset_right = 176.0
+offset_bottom = 113.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.319255, 0.319255, 0.319255, 1)
+theme_override_fonts/font = ExtResource("2_2db0o")
+theme_override_font_sizes/font_size = 60
+text = "Select a Level"
+
 [connection signal="pressed" from="Button Back" to="." method="_on_back_pressed"]
 [connection signal="focus_entered" from="Button Level 1" to="Button Level 1" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Button Level 1" to="Button Level 1" method="_on_focus_exited"]
@@ -138,3 +181,4 @@ Best Record :"
 [connection signal="focus_exited" from="Button Level 2" to="Button Level 2" method="_on_focus_exited"]
 [connection signal="focus_entered" from="Button Level 3" to="Button Level 3" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Button Level 3" to="Button Level 3" method="_on_focus_exited"]
+[connection signal="ready" from="AnimationPlayer/Label _Select a Level_" to="." method="_on_label__select_a_level__ready"]
