@@ -40,6 +40,7 @@ shape = SubResource("CylinderShape3D_n7csw")
 [node name="ParticleGenerator" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, -0.1)
 amount = 20
+amount_ratio = 0.0
 lifetime = 0.5
 speed_scale = 0.5
 process_material = SubResource("ParticleProcessMaterial_68g04")
