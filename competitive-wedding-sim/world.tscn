@@ -2105,7 +2105,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_70uel")
 
 [node name="Player_1" type="CharacterBody3D" parent="." groups=["players"]]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 6.254)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.193355, 0.127516, 6.254)
 collision_mask = 7
 script = ExtResource("18_cbp6q")
 speed = 3.0

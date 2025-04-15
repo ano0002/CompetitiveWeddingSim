@@ -66,7 +66,10 @@ light_energy = 0.677
 
 [node name="Player_1" type="CharacterBody3D" parent="." groups=["players"]]
 collision_mask = 7
+axis_lock_linear_y = true
 script = ExtResource("1_vonw3")
+speed = 4.5
+dash_mult = 3.5
 
 [node name="character_model" parent="Player_1" instance=ExtResource("2_vonw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206766, -0.0312076, 0.0103612)
@@ -76,7 +79,7 @@ transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.3997
 shape = SubResource("CylinderShape3D_u52ul")
 
 [node name="Player_2" type="CharacterBody3D" parent="." groups=["players"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00034, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.997148, -0.0152974, 0.00746489)
 collision_mask = 7
 script = ExtResource("1_vonw3")
 player_num = 2
