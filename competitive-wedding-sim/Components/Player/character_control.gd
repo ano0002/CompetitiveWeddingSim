@@ -18,6 +18,9 @@ var camera : Camera3D = null
 var pick_up_display : Node3D
 
 var holded : Node3D = null
+var use_target : Node3D = null
+
+var frozen = false
 
 func _init():
 	pass
@@ -44,8 +47,12 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		animation_player.play("walk")
 	elif anim_name == "sprint":
 		animation_player.play("sprint")
+	elif anim_name == "pick-up":
+		animation_player.play("pick-up")
 
 func _physics_process(_delta):
+	if frozen:
+		return
 	var camera_rotation_y = 0
 	if camera != null:
 		camera_rotation_y = camera.get_rotation().y
@@ -80,6 +87,13 @@ func _input(event):
 		is_dashing = 5
 		dash_dir = Input.get_vector("move_left_"+str(player_num), "move_right_"+str(player_num), "move_back_"+str(player_num), "move_forward_"+str(player_num)) * speed * dash_mult
 
+	elif event.is_action_released("interact_"+str(player_num)):
+		if use_target != null and use_target.get_class() == "Interactible":
+			use_target.stopped()
+			use_target = null
+			animation_player.play("idle")
+
+
 func pick_up(body):
 	if holded != null:
 		drop()
@@ -98,3 +112,18 @@ func remove_interact_zone():
 	can_interact -= 1
 	if can_interact < 0:
 		can_interact = 0
+
+func start_use(body):
+	animation_player.play("pick-up")
+	frozen = true
+	use_target = body
+
+func unfreeze():
+	frozen = false
+	animation_player.play("idle")
+
+func destroy_holded():
+	if holded != null:
+		holded.queue_free()
+		holded = null
+		animation_player.play("idle")

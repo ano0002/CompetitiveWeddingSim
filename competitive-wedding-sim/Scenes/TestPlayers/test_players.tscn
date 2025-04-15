@@ -1,15 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://bt0bta757pek3"]
+[gd_scene load_steps=21 format=3 uid="uid://bt0bta757pek3"]
 
 [ext_resource type="Script" uid="uid://cyt36c33aqg8o" path="res://Scenes/TestPlayers/test_players.gd" id="1_w8fwf"]
 [ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://Components/TaskManager/task_manager.tscn" id="2_syl7w"]
 [ext_resource type="PackedScene" uid="uid://crsb80qye44v" path="res://Components/Player/player.tscn" id="3_ftsnx"]
 [ext_resource type="PackedScene" uid="uid://cwd0vvjvmgmf6" path="res://Components/PickupItem/pickup_item.tscn" id="4_70mh7"]
+[ext_resource type="PackedScene" uid="uid://pgpwot3so651" path="res://Components/Interactible/interactible.tscn" id="4_t0ql4"]
+[ext_resource type="Script" uid="uid://b3lmpljf8wtyt" path="res://Components/Interactible/interactible.gd" id="5_ju8h0"]
 [ext_resource type="Shader" uid="uid://bouetmump65f5" path="res://Shaders/color_fill.gdshader" id="5_syl7w"]
 [ext_resource type="PackedScene" uid="uid://clyopj3fbcp8g" path="res://Components/Storage/storage.tscn" id="6_ftsnx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_6ofib"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ftsnx"]
 
@@ -70,34 +74,49 @@ shape = SubResource("BoxShape3D_vonw3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.490398, 0)
 mesh = SubResource("BoxMesh_vonw3")
 
-[node name="Interactible Tests" type="Node" parent="."]
+[node name="Interactible" parent="." instance=ExtResource("4_t0ql4")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -2.19882, 0, 1.22731)
+script = ExtResource("5_ju8h0")
+allowed = Array[String](["Red"])
+need_item = true
+destroy_item_on_complete = true
+destroy_self_on_complete = true
+task_duration = 1.0
+reset_on_release = true
 
-[node name="Interactable" parent="Interactible Tests" instance=ExtResource("4_70mh7")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactible"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_6ofib")
+
+[node name="PickUp Tests" type="Node" parent="."]
+
+[node name="PickUp" parent="PickUp Tests" instance=ExtResource("4_70mh7")]
 transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 0.744887, 0, 0.850253)
+item_name = "Red"
 
-[node name="Solid" type="StaticBody3D" parent="Interactible Tests/Interactable"]
+[node name="Solid" type="StaticBody3D" parent="PickUp Tests/PickUp"]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactible Tests/Interactable/Solid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp Tests/PickUp/Solid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
 shape = SubResource("BoxShape3D_ftsnx")
 
-[node name="Model" type="MeshInstance3D" parent="Interactible Tests/Interactable"]
+[node name="Model" type="MeshInstance3D" parent="PickUp Tests/PickUp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_70mh7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_t0ql4")
 
-[node name="Interactable2" parent="Interactible Tests" instance=ExtResource("4_70mh7")]
+[node name="PickUp2" parent="PickUp Tests" instance=ExtResource("4_70mh7")]
 transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 1.72734, 0, -1.43666)
 
-[node name="Solid" type="StaticBody3D" parent="Interactible Tests/Interactable2"]
+[node name="Solid" type="StaticBody3D" parent="PickUp Tests/PickUp2"]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactible Tests/Interactable2/Solid"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp Tests/PickUp2/Solid"]
 shape = SubResource("BoxShape3D_ftsnx")
 
-[node name="Model" type="MeshInstance3D" parent="Interactible Tests/Interactable2"]
+[node name="Model" type="MeshInstance3D" parent="PickUp Tests/PickUp2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_70mh7")
 skeleton = NodePath("")
@@ -107,7 +126,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_syl7w")
 
 [node name="Storage" parent="Storage Tests" instance=ExtResource("6_ftsnx")]
 transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, -2.6293, 0, -2.74167)
-accepted = Array[String](["Lambda"])
 
 [node name="Model" type="MeshInstance3D" parent="Storage Tests/Storage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
