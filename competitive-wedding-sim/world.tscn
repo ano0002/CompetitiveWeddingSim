@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://d3vcs5wluc3lh"]
+[gd_scene load_steps=52 format=4 uid="uid://d3vcs5wluc3lh"]
 
 [ext_resource type="MeshLibrary" uid="uid://cop2gxdynpcov" path="res://GridMesh/Furniture.tres" id="1_o06y3"]
 [ext_resource type="MeshLibrary" uid="uid://8aus6onaltqg" path="res://GridMesh/Walls.tres" id="2_o06y3"]
@@ -352,7 +352,40 @@ size = Vector3(1.08441, 1, 0.489746)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mc2jv"]
 
+[sub_resource type="Shader" id="Shader_cbp6q"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+uniform float brightness = 1.0;
+uniform float contrast = 1.0;
+uniform float saturation = 1.0;
+
+
+
+void fragment() {
+    vec3 c = textureLod(screen_texture, SCREEN_UV, 0.0).rgb;
+
+    c.rgb = mix(vec3(0.0), c.rgb, brightness);
+    c.rgb = mix(vec3(0.5), c.rgb, contrast);
+    c.rgb = mix(vec3(dot(vec3(1.0), c.rgb) * 0.33333), c.rgb, saturation);
+
+	c.rgb = floor(c.rgb*3.)/3.;
+
+    COLOR.rgb = c;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bc84e"]
+shader = SubResource("Shader_cbp6q")
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+
 [node name="World" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7.523, 12.175)
+fov = 31.528
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.147, 0)
@@ -388,10 +421,6 @@ metadata/_editor_floor_ = Vector3(0, 2, 0)
 mesh_library = ExtResource("6_dwbse")
 cell_size = Vector3(0.3, 0.3, 0.2)
 metadata/_editor_floor_ = Vector3(0, 2, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7.67, 12.175)
-fov = 31.528
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
 transform = Transform3D(-0.397823, -0.374807, -0.837411, -0.434222, -0.727129, 0.531729, -0.808201, 0.575156, 0.126519, -0.00171041, 4.43578, 6.75328)
@@ -480,9 +509,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27309, 0.15, 6.60189)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26413, 0.15, 5.8946)
 
 [node name="Player_1" type="CharacterBody3D" parent="." groups=["players"]]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 6.254)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.193355, 0.127516, 6.254)
 collision_mask = 7
+axis_lock_linear_y = true
 wall_min_slide_angle = 3.14159
+floor_max_angle = 0.0
 script = ExtResource("18_cbp6q")
 speed = 3.0
 
@@ -492,3 +523,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206766, -0.0312076, 0.010
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player_1"]
 transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_mc2jv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_bc84e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
