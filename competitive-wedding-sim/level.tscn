@@ -1,9 +1,33 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt0bta757pek3"]
+[gd_scene load_steps=17 format=3 uid="uid://bt0bta757pek3"]
 
-[ext_resource type="PackedScene" uid="uid://dv78agv3vjl13" path="res://Assets/Characters/character-female-a.glb" id="1_u52ul"]
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://character_control.gd" id="1_vonw3"]
+[ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="2_vonw3"]
+[ext_resource type="PackedScene" uid="uid://be654a1tctso0" path="res://Assets/Characters/character-male-a.glb" id="3_f2txt"]
+[ext_resource type="Shader" uid="uid://bouetmump65f5" path="res://color_fill.gdshader" id="3_oi3di"]
+[ext_resource type="Script" uid="uid://cvorkkstiowek" path="res://interact_zone.gd" id="5_f2txt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oi3di"]
+sky_top_color = Color(0.86, 0.7482, 0.77615, 1)
+sky_horizon_color = Color(1.05407, 1.01837, 1.01636, 1)
+ground_horizon_color = Color(1.05407, 1.01837, 1.01636, 1)
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_0b4ue"]
+sky_material = SubResource("ProceduralSkyMaterial_oi3di")
+
+[sub_resource type="Environment" id="Environment_f2txt"]
+background_mode = 2
+sky = SubResource("Sky_0b4ue")
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.85
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_u52ul"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
 
 [sub_resource type="Gradient" id="Gradient_vonw3"]
 
@@ -13,42 +37,116 @@
 color_ramp = SubResource("Gradient_vonw3")
 noise = SubResource("FastNoiseLite_oi3di")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0b4ue"]
+render_priority = 0
+shader = ExtResource("3_oi3di")
+shader_parameter/color = Color(0.313292, 0.50872, 1, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oi3di"]
+radius = 1.719
 
 [node name="Node3D" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_f2txt")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.858683, 0.512507, 0, -0.512507, 0.858683, -0.298525, 3.48382, 4.82821)
+transform = Transform3D(0.923913, -0.196087, 0.328535, 0, 0.858683, 0.512507, -0.382603, -0.473512, 0.793348, 4.833, 7.798, 10.55)
+fov = 36.6044
 size = 8.619
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.893826, 0.448414, 0, -0.448414, 0.893826, 0, 1.226, 1.06178)
+light_energy = 0.677
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-collision_mask = 2
+[node name="Player_1" type="CharacterBody3D" parent="." groups=["players"]]
+collision_mask = 7
 script = ExtResource("1_vonw3")
-speed = 6.0
 
-[node name="character-female-a2" parent="CharacterBody3D" instance=ExtResource("1_u52ul")]
-transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, 0, 0)
+[node name="character_model" parent="Player_1" instance=ExtResource("2_vonw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206766, -0.0312076, 0.0103612)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.4, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player_1"]
+transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_u52ul")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-texture = SubResource("NoiseTexture2D_0b4ue")
+[node name="Player_2" type="CharacterBody3D" parent="." groups=["players"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00034, 0, 0)
+collision_mask = 7
+script = ExtResource("1_vonw3")
+player_num = 2
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="character_model" parent="Player_2" instance=ExtResource("3_f2txt")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player_2"]
+transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_u52ul")
+
+[node name="Solid" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86575, -0.356169, 1.13774)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Solid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
 shape = SubResource("BoxShape3D_vonw3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.490398, 0)
 mesh = SubResource("BoxMesh_vonw3")
+
+[node name="Ground" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+texture = SubResource("NoiseTexture2D_0b4ue")
+
+[node name="Interactibles" type="Node" parent="."]
+
+[node name="Interactable" type="Node3D" parent="Interactibles" groups=["interactables"]]
+
+[node name="Model" type="MeshInstance3D" parent="Interactibles/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, 0.134229, 1.13774)
+mesh = SubResource("BoxMesh_vonw3")
+skeleton = NodePath("../Solid")
+surface_material_override/0 = SubResource("ShaderMaterial_0b4ue")
+
+[node name="Solid" type="StaticBody3D" parent="Interactibles/Interactable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, -0.356169, 1.13774)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactibles/Interactable/Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
+shape = SubResource("BoxShape3D_vonw3")
+
+[node name="InteractZone" type="Area3D" parent="Interactibles/Interactable"]
+collision_layer = 4
+script = ExtResource("5_f2txt")
+
+[node name="CollisionArea" type="CollisionShape3D" parent="Interactibles/Interactable/InteractZone"]
+transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 1.38947, 0.48598, 1.13774)
+shape = SubResource("CylinderShape3D_oi3di")
+
+[node name="Interactable2" type="Node3D" parent="Interactibles" groups=["interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.11372, -0.0319419, -3.97534)
+
+[node name="Model" type="MeshInstance3D" parent="Interactibles/Interactable2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, 0.134229, 1.13774)
+mesh = SubResource("BoxMesh_vonw3")
+skeleton = NodePath("../Solid")
+surface_material_override/0 = SubResource("ShaderMaterial_0b4ue")
+
+[node name="Solid" type="StaticBody3D" parent="Interactibles/Interactable2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38947, -0.356169, 1.13774)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactibles/Interactable2/Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
+shape = SubResource("BoxShape3D_vonw3")
+
+[node name="InteractZone" type="Area3D" parent="Interactibles/Interactable2"]
+collision_layer = 4
+script = ExtResource("5_f2txt")
+
+[node name="CollisionArea" type="CollisionShape3D" parent="Interactibles/Interactable2/InteractZone"]
+transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 1.38947, 0.48598, 1.13774)
+shape = SubResource("CylinderShape3D_oi3di")
+
+[connection signal="area_entered" from="Interactibles/Interactable2/InteractZone" to="Interactibles/Interactable2/InteractZone" method="_on_area_entered"]
