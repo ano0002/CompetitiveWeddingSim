@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bt0bta757pek3"]
+[gd_scene load_steps=25 format=3 uid="uid://bt0bta757pek3"]
 
 [ext_resource type="Script" uid="uid://cyt36c33aqg8o" path="res://Scenes/TestPlayers/test_players.gd" id="1_w8fwf"]
 [ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://Components/TaskManager/task_manager.tscn" id="2_syl7w"]
@@ -13,8 +13,6 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
 
-[sub_resource type="PrismMesh" id="PrismMesh_6ofib"]
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_ftsnx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_70mh7"]
@@ -22,14 +20,36 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0ql4"]
 render_priority = 0
 shader = ExtResource("5_syl7w")
-shader_parameter/color = Color(0.794009, 0.38168, 0.600038, 1)
+shader_parameter/color = Color(1, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_syl7w"]
 render_priority = 0
 shader = ExtResource("5_syl7w")
-shader_parameter/color = Color(0, 0.560259, 0.937774, 1)
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ju8h0"]
+render_priority = 0
+shader = ExtResource("5_syl7w")
+shader_parameter/color = Color(0, 1, 0, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_70mh7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1he5q"]
+render_priority = 0
+shader = ExtResource("5_syl7w")
+shader_parameter/color = Color(0, 0, 1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_6ofib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjabt"]
+render_priority = 0
+shader = ExtResource("5_syl7w")
+shader_parameter/color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ofib"]
+render_priority = 0
+shader = ExtResource("5_syl7w")
+shader_parameter/color = Color(0, 1, 0, 1)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_n6hdu"]
 
@@ -54,6 +74,10 @@ glow_enabled = true
 script = ExtResource("1_w8fwf")
 
 [node name="TaskManager" parent="." instance=ExtResource("2_syl7w")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38419e-07, 0)
+tasks_names = Array[String](["Destroy green", "Store blue", "Use Red"])
+tasks_needed_repeats = Array[int]([1, 1, 2])
 
 [node name="Player" parent="." instance=ExtResource("3_ftsnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.635167, 0, 0)
@@ -73,20 +97,6 @@ shape = SubResource("BoxShape3D_vonw3")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Collider Test"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.490398, 0)
 mesh = SubResource("BoxMesh_vonw3")
-
-[node name="Interactible" parent="." instance=ExtResource("4_t0ql4")]
-transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -2.19882, 0, 1.22731)
-script = ExtResource("5_ju8h0")
-allowed = Array[String](["Red"])
-need_item = true
-destroy_item_on_complete = true
-destroy_self_on_complete = true
-task_duration = 1.0
-reset_on_release = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactible"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.5, 0)
-mesh = SubResource("PrismMesh_6ofib")
 
 [node name="PickUp Tests" type="Node" parent="."]
 
@@ -122,14 +132,83 @@ mesh = SubResource("BoxMesh_70mh7")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_syl7w")
 
+[node name="PickUp3" parent="PickUp Tests" instance=ExtResource("4_70mh7")]
+transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 3.28617, 0, 0.850253)
+item_name = "Red"
+
+[node name="Solid" type="StaticBody3D" parent="PickUp Tests/PickUp3"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp Tests/PickUp3/Solid"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.500894, 0)
+shape = SubResource("BoxShape3D_ftsnx")
+
+[node name="Model" type="MeshInstance3D" parent="PickUp Tests/PickUp3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_70mh7")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_t0ql4")
+
+[node name="PickUp4" parent="PickUp Tests" instance=ExtResource("4_70mh7")]
+transform = Transform3D(0.155, 0, 0, 0, 0.155, 0, 0, 0, 0.155, 1.72734, 0, -3.6735)
+item_name = "Green"
+
+[node name="Solid" type="StaticBody3D" parent="PickUp Tests/PickUp4"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickUp Tests/PickUp4/Solid"]
+shape = SubResource("BoxShape3D_ftsnx")
+
+[node name="Model" type="MeshInstance3D" parent="PickUp Tests/PickUp4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_70mh7")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_ju8h0")
+
 [node name="Storage Tests" type="Node" parent="."]
 
 [node name="Storage" parent="Storage Tests" instance=ExtResource("6_ftsnx")]
 transform = Transform3D(0.27, 0, 0, 0, 0.27, 0, 0, 0, 0.27, -2.6293, 0, -2.74167)
+task_name = "Store blue"
 
 [node name="Model" type="MeshInstance3D" parent="Storage Tests/Storage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("CylinderMesh_70mh7")
+surface_material_override/0 = SubResource("ShaderMaterial_1he5q")
+
+[node name="Interactible Tests" type="Node" parent="."]
+
+[node name="Interactible" parent="Interactible Tests" instance=ExtResource("4_t0ql4")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -2.19882, 0, 1.22731)
+script = ExtResource("5_ju8h0")
+task_name = "Use Red"
+allowed = Array[String](["Red"])
+need_item = true
+destroy_item_on_complete = true
+destroy_self_on_complete = false
+task_duration = 1.0
+reset_on_release = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactible Tests/Interactible"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_6ofib")
+surface_material_override/0 = SubResource("ShaderMaterial_pjabt")
+
+[node name="Interactible2" parent="Interactible Tests" instance=ExtResource("4_t0ql4")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.928098, 0, -3.83903)
+script = ExtResource("5_ju8h0")
+task_name = "Destroy green"
+allowed = Array[String](["Green"])
+need_item = true
+destroy_item_on_complete = true
+destroy_self_on_complete = true
+task_duration = 1.0
+reset_on_release = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactible Tests/Interactible2"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_6ofib")
+surface_material_override/0 = SubResource("ShaderMaterial_6ofib")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.923913, -0.196087, 0.328535, 0, 0.858683, 0.512507, -0.382603, -0.473512, 0.793348, 4.833, 7.798, 10.55)

@@ -88,7 +88,7 @@ func _input(event):
 		dash_dir = Input.get_vector("move_left_"+str(player_num), "move_right_"+str(player_num), "move_back_"+str(player_num), "move_forward_"+str(player_num)) * speed * dash_mult
 
 	elif event.is_action_released("interact_"+str(player_num)):
-		if use_target != null and use_target.get_class() == "Interactible":
+		if use_target != null:
 			use_target.stopped()
 			use_target = null
 			animation_player.play("idle")

@@ -3,13 +3,14 @@ extends Node3D
 var default_owner = null
 var players_in = []
 
+@export var task_name: String = "Interaction Task"
+
 @export_group("Items")
 @export var allowed: Array[String] = ["Lambda"]
 @export var need_item: bool = false
 @export var destroy_item_on_complete: bool = false
 
 @export_group("Self")
-@export var space: int = 1
 @export var destroy_self_on_complete: bool = false
 @export var task_duration: float = 1.0
 @export var reset_on_release: bool = true
@@ -18,10 +19,14 @@ var is_being_used = false
 var interacted_time = 0.0
 var interacting_player = null
 
+var task_manager: Node = null
+
 func _ready():
 	var players = get_tree().get_nodes_in_group("players")
 	for player in players:
 		player.interact_signal.connect(self._on_interact)
+
+	task_manager = %TaskManager
 
 	default_owner = get_parent()
 
@@ -54,8 +59,14 @@ func _process(delta: float) -> void:
 				interacting_player.destroy_holded()
 			if destroy_self_on_complete:
 				self.queue_free()
+			if task_manager != null:
+				task_manager._on_task_progress(task_name)
+			interacting_player = null
 
 func stopped():
 	is_being_used = false
+	if interacting_player != null:
+		interacting_player.unfreeze()
+		interacting_player = null
 	if reset_on_release:
 		interacted_time = 0.0

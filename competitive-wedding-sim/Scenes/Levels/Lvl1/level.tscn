@@ -1,6 +1,7 @@
-[gd_scene load_steps=239 format=4 uid="uid://d3vcs5wluc3lh"]
+[gd_scene load_steps=240 format=4 uid="uid://d3vcs5wluc3lh"]
 
 [ext_resource type="PackedScene" uid="uid://crsb80qye44v" path="res://Components/Player/player.tscn" id="1_2hkqn"]
+[ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://Components/TaskManager/task_manager.tscn" id="1_4xvd3"]
 [ext_resource type="MeshLibrary" uid="uid://cop2gxdynpcov" path="res://GridMesh/Furniture.tres" id="2_34erp"]
 [ext_resource type="MeshLibrary" uid="uid://wtpbckob2lvj" path="res://GridMesh/Walls.tres" id="3_k2bse"]
 [ext_resource type="MeshLibrary" uid="uid://b2vamibxdhdyy" path="res://GridMesh/KitchenFurniture.tres" id="4_c7pbv"]
@@ -2960,6 +2961,11 @@ material = SubResource("StandardMaterial3D_8ee27")
 
 [node name="World" type="Node3D"]
 
+[node name="TaskManager" parent="." instance=ExtResource("1_4xvd3")]
+unique_name_in_owner = true
+tasks_names = Array[String](["Clean Plates"])
+tasks_needed_repeats = Array[int]([4])
+
 [node name="Player" parent="." instance=ExtResource("1_2hkqn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.84778)
 
@@ -3590,10 +3596,10 @@ transform = Transform3D(2.7, 0, 0, 0, 3, 0, 0, 0, 3.4, -0.466695, 0, 4.23506)
 mesh = SubResource("PlaneMesh_wse8f")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.824688, 0.400856, -0.399004, -0.0164595, 0.722178, 0.691511, 0.565348, -0.563714, 0.60217, -5.01233, 10.5629, 13.9892)
+transform = Transform3D(0.824688, 0.400856, -0.399004, -0.0164595, 0.722178, 0.691511, 0.565348, -0.563714, 0.60217, -7.952, 10.563, 12.199)
 projection = 1
 fov = 31.528
-size = 7.0
+size = 7.1
 far = 342.77
 
 [node name="Screwdriver" parent="." instance=ExtResource("15_mne12")]
@@ -3770,6 +3776,7 @@ transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, 
 [node name="KitchenSink" type="Node3D" parent="."]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -2.19882, 0, 1.22731)
 script = ExtResource("35_wxs8h")
+task_name = "Clean Plates"
 allowed = Array[String](["Plate"])
 need_item = true
 destroy_item_on_complete = true
