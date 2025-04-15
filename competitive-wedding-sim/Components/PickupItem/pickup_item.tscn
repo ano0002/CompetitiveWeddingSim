@@ -13,7 +13,6 @@ transform = Transform3D(1.505, 0, 0, 0, 1.505, 0, 0, 0, 1.505, 0, 0, 0)
 collision_layer = 4
 
 [node name="CollisionArea" type="CollisionShape3D" parent="InteractZone"]
-transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 0, 0, 0)
 shape = SubResource("CylinderShape3D_oi3di")
 
 [connection signal="body_entered" from="InteractZone" to="." method="_on_body_entered"]
