@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6gjecgfpv73c"]
+[gd_scene load_steps=11 format=3 uid="uid://b6gjecgfpv73c"]
 
 [ext_resource type="Script" uid="uid://dpne4mlnv6oco" path="res://level_selector.gd" id="1_2db0o"]
 [ext_resource type="Texture2D" uid="uid://d3osebxqp4d5h" path="res://levelselectbackground.jpg" id="1_5xyw6"]
 [ext_resource type="FontFile" uid="uid://b2w2wrn27nw2o" path="res://font/Cartoon2US-Regular.ttf" id="2_2db0o"]
-[ext_resource type="Script" path="res://button_level.gd" id="4_sn3u0"]
+[ext_resource type="Script" uid="uid://1fgsvct3wqfe" path="res://Scenes/button_level_1.gd" id="4_b8t80"]
+[ext_resource type="Script" uid="uid://mj5l78ny564g" path="res://Scenes/button_level_2.gd" id="5_t6kw3"]
+[ext_resource type="Script" uid="uid://b40ak4fieud5c" path="res://Scenes/button_level_3.gd" id="6_g3msu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sn3u0"]
 texture = ExtResource("1_5xyw6")
@@ -77,6 +79,7 @@ theme_override_colors/font_color = Color(0.349065, 0.349065, 0.349065, 1)
 theme_override_colors/font_focus_color = Color(0.34902, 0.34902, 0.34902, 1)
 theme_override_fonts/font = ExtResource("2_2db0o")
 theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxFlat_sn3u0")
 theme_override_styles/hover = SubResource("StyleBoxFlat_sn3u0")
 theme_override_styles/normal = SubResource("StyleBoxFlat_3o3bh")
 text = "Back"
@@ -90,7 +93,7 @@ offset_bottom = 348.0
 theme_override_fonts/font = ExtResource("2_2db0o")
 theme_override_font_sizes/font_size = 40
 text = "Level 1"
-script = ExtResource("4_sn3u0")
+script = ExtResource("4_b8t80")
 
 [node name="Button Level 2" type="Button" parent="."]
 layout_mode = 0
@@ -101,7 +104,7 @@ offset_bottom = 348.0
 theme_override_fonts/font = ExtResource("2_2db0o")
 theme_override_font_sizes/font_size = 40
 text = "Level 2"
-script = ExtResource("4_sn3u0")
+script = ExtResource("5_t6kw3")
 
 [node name="Button Level 3" type="Button" parent="."]
 layout_mode = 0
@@ -112,7 +115,7 @@ offset_bottom = 348.0
 theme_override_fonts/font = ExtResource("2_2db0o")
 theme_override_font_sizes/font_size = 40
 text = "Level 3"
-script = ExtResource("4_sn3u0")
+script = ExtResource("6_g3msu")
 
 [node name="Label Level Info" type="Label" parent="."]
 layout_mode = 0
@@ -129,12 +132,9 @@ Best Record :"
 
 [connection signal="ready" from="Label _Select a Level_" to="." method="_on_label__select_a_level__ready"]
 [connection signal="pressed" from="Button Back" to="." method="_on_back_pressed"]
-[connection signal="mouse_entered" from="Button Level 1" to="Button Level 1" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Button Level 1" to="Button Level 1" method="_on_mouse_exited"]
-[connection signal="pressed" from="Button Level 1" to="." method="_on_button_level_1_pressed"]
-[connection signal="mouse_entered" from="Button Level 2" to="Button Level 2" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Button Level 2" to="Button Level 2" method="_on_mouse_exited"]
-[connection signal="pressed" from="Button Level 2" to="." method="_on_button_level_2_pressed"]
-[connection signal="mouse_entered" from="Button Level 3" to="Button Level 3" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Button Level 3" to="Button Level 3" method="_on_mouse_exited"]
-[connection signal="pressed" from="Button Level 3" to="." method="_on_button_level_3_pressed"]
+[connection signal="focus_entered" from="Button Level 1" to="Button Level 1" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Button Level 1" to="Button Level 1" method="_on_focus_exited"]
+[connection signal="focus_entered" from="Button Level 2" to="Button Level 2" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Button Level 2" to="Button Level 2" method="_on_focus_exited"]
+[connection signal="focus_entered" from="Button Level 3" to="Button Level 3" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Button Level 3" to="Button Level 3" method="_on_focus_exited"]

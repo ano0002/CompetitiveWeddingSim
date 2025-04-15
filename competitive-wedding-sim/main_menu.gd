@@ -1,7 +1,7 @@
 extends Control
 
 func _ready() -> void:
-	pass
+	$"buttons/Button Play".grab_focus()
 	
 func _process(delta: float) -> void:
 	pass
@@ -9,10 +9,13 @@ func _process(delta: float) -> void:
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/level_selector.tscn")
 
-
 func _on_option_pressed() -> void:
 	pass # Replace with function body.
 
-
 func _on_quit_pressed() -> void:
 	get_tree().quit() # Replace with function body.
+	
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept") :
+		get_tree().change_scene_to_file("res://Scenes/level_selector.tscn")
