@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bt0bta757pek3"]
 
-[ext_resource type="PackedScene" path="res://TaskManager.tscn" id="1_1ainy"]
-[ext_resource type="Script" path="res://ScriptTestScene.gd" id="1_n6hdu"]
+[ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://TaskManager.tscn" id="1_1ainy"]
+[ext_resource type="Script" uid="uid://cyt36c33aqg8o" path="res://ScriptTestScene.gd" id="1_n6hdu"]
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://character_control.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://be654a1tctso0" path="res://Assets/Characters/character-male-a.glb" id="3_f2txt"]

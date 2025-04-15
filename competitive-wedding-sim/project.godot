@@ -104,3 +104,16 @@ dash_2={
 3d_physics/layer_2="Solid"
 3d_physics/layer_3="Interaction"
 3d_physics/layer_4="Items"
+
+[rendering]
+
+lights_and_shadows/directional_shadow/size=4000
+lights_and_shadows/directional_shadow/size.mobile=3000
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality.mobile=4
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=4
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality.mobile=4
+lights_and_shadows/positional_shadow/atlas_size=9000
+lights_and_shadows/positional_shadow/atlas_size.mobile=4000
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=3
+lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=3
