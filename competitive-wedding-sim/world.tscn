@@ -1840,12 +1840,6 @@ mesh_library = ExtResource("6_dwbse")
 cell_size = Vector3(0.3, 0.3, 0.2)
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Items"]
-transform = Transform3D(0.656283, 0.518891, -0.547763, -0.0146594, 0.734613, 0.678328, 0.754373, -0.437146, 0.48972, -9.86813, 12.9263, 14.1817)
-projection = 1
-fov = 31.528
-size = 6.714
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Items"]
 transform = Transform3D(0.330288, -0.837771, -0.434799, -0.505256, -0.546021, 0.668264, -0.797262, -0.00103484, -0.603633, -0.00171041, 4.43578, 6.75328)
 shadow_enabled = true
@@ -2137,8 +2131,9 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_70uel")
 
 [node name="Player_1" type="CharacterBody3D" parent="." groups=["players"]]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.193355, 0.127516, 5.45809)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.193, 0, 5.458)
 collision_mask = 7
+axis_lock_linear_y = true
 script = ExtResource("18_cbp6q")
 speed = 3.0
 
@@ -2200,3 +2195,9 @@ modulate = Color(0.941131, 0.711615, 0.513554, 1)
 pixel_size = 20.7338
 axis = 1
 texture = SubResource("CanvasTexture_k3n1d")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.656283, 0.518891, -0.547763, -0.0146594, 0.734613, 0.678328, 0.754373, -0.437145, 0.48972, -9.86813, 12.7793, 14.1817)
+projection = 1
+fov = 31.528
+size = 6.714
