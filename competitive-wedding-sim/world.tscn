@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=4 uid="uid://d3vcs5wluc3lh"]
+[gd_scene load_steps=122 format=4 uid="uid://d3vcs5wluc3lh"]
 
 [ext_resource type="MeshLibrary" uid="uid://cop2gxdynpcov" path="res://GridMesh/Furniture.tres" id="1_o06y3"]
 [ext_resource type="MeshLibrary" uid="uid://wtpbckob2lvj" path="res://GridMesh/Walls.tres" id="2_o06y3"]
@@ -10,20 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://kxjw8vx7rtff" path="res://kenney_furniture-kit/Models/GLTF format/deskCorner.glb" id="10_wse8f"]
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://character_control.gd" id="18_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="19_26xuy"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wse8f"]
-sky_horizon_color = Color(1.09454, 1.16818, 1.24606, 1)
-ground_bottom_color = Color(0.429715, 0.655273, 0.87079, 1)
-ground_horizon_color = Color(1.09454, 1.16818, 1.24606, 1)
-
-[sub_resource type="Sky" id="Sky_ic0uy"]
-sky_material = SubResource("ProceduralSkyMaterial_wse8f")
-
-[sub_resource type="Environment" id="Environment_k3n1d"]
-background_mode = 2
-sky = SubResource("Sky_ic0uy")
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppl8u"]
 resource_name = "wood"
@@ -1804,9 +1790,6 @@ points = PackedVector3Array(0.8, 0.31, 0, 0.8, 0, 0, 0.8, 0.31, -0.25, 0, 0.31, 
 
 [node name="World" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_k3n1d")
-
 [node name="Items" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.147, 0)
 
@@ -1840,8 +1823,12 @@ mesh_library = ExtResource("6_dwbse")
 cell_size = Vector3(0.3, 0.3, 0.2)
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
+[node name="Camera3D" type="Camera3D" parent="Items"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7.67, 12.175)
+fov = 31.528
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Items"]
-transform = Transform3D(0.330288, -0.837771, -0.434799, -0.505256, -0.546021, 0.668264, -0.797262, -0.00103484, -0.603633, -0.00171041, 4.43578, 6.75328)
+transform = Transform3D(-0.397823, -0.374807, -0.837411, -0.434222, -0.727129, 0.531729, -0.808201, 0.575156, 0.126519, -0.00171041, 4.43578, 6.75328)
 shadow_enabled = true
 shadow_normal_bias = 10.0
 shadow_blur = 0.717
@@ -2131,9 +2118,8 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_70uel")
 
 [node name="Player_1" type="CharacterBody3D" parent="." groups=["players"]]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.193, 0, 5.458)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.193355, 0.127516, 5.45809)
 collision_mask = 7
-axis_lock_linear_y = true
 script = ExtResource("18_cbp6q")
 speed = 3.0
 
@@ -2195,9 +2181,3 @@ modulate = Color(0.941131, 0.711615, 0.513554, 1)
 pixel_size = 20.7338
 axis = 1
 texture = SubResource("CanvasTexture_k3n1d")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.656283, 0.518891, -0.547763, -0.0146594, 0.734613, 0.678328, 0.754373, -0.437145, 0.48972, -9.86813, 12.7793, 14.1817)
-projection = 1
-fov = 31.528
-size = 6.714
