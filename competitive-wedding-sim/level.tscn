@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bt0bta757pek3"]
 
-[ext_resource type="PackedScene" uid="uid://cfgeyq176uxh3" path="res://TaskManager.tscn" id="1_1ainy"]
-[ext_resource type="Script" uid="uid://cyt36c33aqg8o" path="res://ScriptTestScene.gd" id="1_n6hdu"]
+[ext_resource type="PackedScene" path="res://TaskManager.tscn" id="1_1ainy"]
+[ext_resource type="Script" path="res://ScriptTestScene.gd" id="1_n6hdu"]
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://character_control.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="2_vonw3"]
 [ext_resource type="PackedScene" uid="uid://be654a1tctso0" path="res://Assets/Characters/character-male-a.glb" id="3_f2txt"]
@@ -27,17 +27,15 @@ glow_enabled = true
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_u52ul"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n6hdu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_km5ld"]
+radius = 0.15
+height = 0.3
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_vonw3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_vonw3"]
-
-[sub_resource type="Gradient" id="Gradient_vonw3"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_oi3di"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0b4ue"]
-color_ramp = SubResource("Gradient_vonw3")
-noise = SubResource("FastNoiseLite_oi3di")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0b4ue"]
 render_priority = 0
@@ -46,6 +44,8 @@ shader_parameter/color = Color(0.313292, 0.50872, 1, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_oi3di"]
 radius = 1.719
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_n6hdu"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_n6hdu")
@@ -68,8 +68,6 @@ light_energy = 0.677
 collision_mask = 7
 axis_lock_linear_y = true
 script = ExtResource("1_vonw3")
-speed = 4.5
-dash_mult = 3.5
 
 [node name="character_model" parent="Player_1" instance=ExtResource("2_vonw3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206766, -0.0312076, 0.0103612)
@@ -77,6 +75,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206766, -0.0312076, 0.010
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player_1"]
 transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_u52ul")
+
+[node name="ParticleGenerator" type="GPUParticles3D" parent="Player_1"]
+process_material = SubResource("ParticleProcessMaterial_n6hdu")
+draw_pass_1 = SubResource("SphereMesh_km5ld")
 
 [node name="Player_2" type="CharacterBody3D" parent="." groups=["players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.997148, -0.0152974, 0.00746489)
@@ -90,6 +92,10 @@ player_num = 2
 transform = Transform3D(0.4, 0, 0, 0, 0.399739, 0.0144552, 0, -0.0144552, 0.399739, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_u52ul")
 
+[node name="ParticleGenerator" type="GPUParticles3D" parent="Player_2"]
+process_material = SubResource("ParticleProcessMaterial_n6hdu")
+draw_pass_1 = SubResource("SphereMesh_km5ld")
+
 [node name="Solid" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86575, -0.356169, 1.13774)
 collision_layer = 2
@@ -101,10 +107,6 @@ shape = SubResource("BoxShape3D_vonw3")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Solid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.490398, 0)
 mesh = SubResource("BoxMesh_vonw3")
-
-[node name="Ground" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-texture = SubResource("NoiseTexture2D_0b4ue")
 
 [node name="Interactibles" type="Node" parent="."]
 
@@ -156,5 +158,12 @@ script = ExtResource("5_f2txt")
 [node name="CollisionArea" type="CollisionShape3D" parent="Interactibles/Interactable2/InteractZone"]
 transform = Transform3D(1.00505, 0, 0, 0, 1.00505, 0, 0, 0, 1.00505, 1.38947, 0.48598, 1.13774)
 shape = SubResource("CylinderShape3D_oi3di")
+
+[node name="Orange" type="Sprite3D" parent="."]
+transform = Transform3D(0.883333, 0, 0, 0, 1, 0, 0, 0, 1.08333, -1.21991, 0, -0.745532)
+modulate = Color(0.941131, 0.711615, 0.513554, 1)
+pixel_size = 20.7338
+axis = 1
+texture = SubResource("CanvasTexture_n6hdu")
 
 [connection signal="area_entered" from="Interactibles/Interactable2/InteractZone" to="Interactibles/Interactable2/InteractZone" method="_on_area_entered"]

@@ -2148,7 +2148,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.088
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 4.472)
 
 [node name="Bleu" type="Sprite3D" parent="Floors"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 modulate = Color(0.654902, 0.780392, 0.905882, 1)
 pixel_size = 20.7338
