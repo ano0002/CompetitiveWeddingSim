@@ -75,6 +75,7 @@ text = "Quit the Game
 "
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 287.0
 offset_top = 319.0

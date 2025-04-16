@@ -4194,6 +4194,7 @@ stream = ExtResource("28_cc4vl")
 volume_db = 6.03
 autoplay = true
 
+[connection signal="lvl_completed" from="TaskManager" to="." method="_on_win"]
 [connection signal="body_entered" from="KitchenSink/InteractZone" to="KitchenSink" method="_on_body_entered"]
 [connection signal="body_exited" from="KitchenSink/InteractZone" to="KitchenSink" method="_on_body_exited"]
 [connection signal="body_entered" from="TV Repair/InteractZone" to="TV Repair" method="_on_body_entered"]
