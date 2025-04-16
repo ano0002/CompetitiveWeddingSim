@@ -4191,7 +4191,8 @@ skeleton = NodePath("")
 
 [node name="MusicPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("28_cc4vl")
-volume_db = 6.03
+volume_db = 7.638
+max_db = 1.5
 autoplay = true
 
 [connection signal="lvl_completed" from="TaskManager" to="." method="_on_win"]
