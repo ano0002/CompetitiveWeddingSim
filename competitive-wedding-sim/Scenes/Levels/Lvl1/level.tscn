@@ -3217,6 +3217,10 @@ tasks_needed_repeats = Array[int]([4, 1, 1])
 [node name="Player" parent="." instance=ExtResource("1_2hkqn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.84778)
 
+[node name="Player2" parent="." instance=ExtResource("1_2hkqn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22257, 0, 4.38809)
+player_num = 2
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_udxuc")
 
