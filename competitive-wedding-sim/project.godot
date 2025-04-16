@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CWS"
-run/main_scene="uid://bt0bta757pek3"
+run/main_scene="uid://d2uql5t0sdp6l"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
