@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bji6yixk2hh75"]
+[gd_scene load_steps=11 format=3 uid="uid://bji6yixk2hh75"]
 
 [ext_resource type="Script" uid="uid://dmlkv8u6o2thx" path="res://Scenes/SettingsMenu/setting_menu.gd" id="1_v6htu"]
 [ext_resource type="Texture2D" uid="uid://dcmw85uvp4gpk" path="res://Assets/UI/White/2x/information.png" id="2_7mqo8"]
 [ext_resource type="Texture2D" uid="uid://b3rmfrhfymtom" path="res://Assets/Menus/darkened_back.png" id="2_d4vle"]
-[ext_resource type="Texture2D" uid="uid://crm3m2g6dnah5" path="res://Assets/UI/White/2x/audioOn.png" id="3_d4vle"]
 [ext_resource type="FontFile" uid="uid://b2w2wrn27nw2o" path="res://Assets/Fonts/Cartoon2US-Regular.ttf" id="4_387fa"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_387fa"]
@@ -80,36 +79,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_387fa")
 
-[node name="volume" type="HSlider" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -196.0
-offset_top = -8.0
-offset_right = 196.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
-value = 50.0
-
 [node name="Information" type="Sprite2D" parent="."]
-position = Vector2(113, 544)
+position = Vector2(372, 330)
 texture = ExtResource("2_7mqo8")
-
-[node name="AudioOn" type="Sprite2D" parent="."]
-position = Vector2(340, 323)
-scale = Vector2(0.5, 0.51)
-texture = ExtResource("3_d4vle")
 
 [node name="Label Credits" type="Label" parent="."]
 layout_mode = 0
-offset_left = 164.0
-offset_top = 463.0
-offset_right = 772.0
-offset_bottom = 616.0
+offset_left = 456.0
+offset_top = 262.0
+offset_right = 1064.0
+offset_bottom = 415.0
 text = "Par :
 Gaspard BROM 
 Noah HEMON
@@ -161,7 +140,6 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.947199, 0.947199, 0.947199, 1)
 theme_override_fonts/font = ExtResource("4_387fa")
 theme_override_font_sizes/font_size = 60
-text = "Settings"
+text = "Credits"
 
-[connection signal="value_changed" from="volume" to="." method="_on_volume_value_changed"]
 [connection signal="pressed" from="Button Back" to="." method="_on_button_back_pressed"]
