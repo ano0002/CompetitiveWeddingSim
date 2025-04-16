@@ -250,6 +250,6 @@ theme_override_font_sizes/font_size = 90
 text = "SIM"
 
 [connection signal="pressed" from="buttons/Button Play" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="buttons/Button Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="buttons/Button Option" to="." method="_on_button_option_pressed"]
+[connection signal="pressed" from="buttons/Button Option" to="." method="_on_option_pressed"]
 [connection signal="pressed" from="buttons/Button Quit" to="." method="_on_quit_pressed"]
