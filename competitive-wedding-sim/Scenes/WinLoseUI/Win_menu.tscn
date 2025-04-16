@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3jhl04g0nyhd"]
+
+[ext_resource type="Script" uid="uid://bwnm54i7mnxvd" path="res://Scenes/WinLoseUI/win_menu.gd" id="1_ntb60"]
+[ext_resource type="Texture2D" uid="uid://cd3wque3eovgo" path="res://Assets/Menus/marriage_background.jpg" id="1_sgb7o"]
+[ext_resource type="FontFile" uid="uid://b2w2wrn27nw2o" path="res://Assets/Fonts/Cartoon2US-Regular.ttf" id="2_ntb60"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4fmfs"]
+texture = ExtResource("1_sgb7o")
+
+[node name="WinMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ntb60")
+
+[node name="Panel2" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4fmfs")
+
+[node name="Label2" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.0
+offset_top = -146.5
+offset_right = 285.0
+offset_bottom = -21.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.790277, 0.596016, 0.273626, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_ntb60")
+theme_override_font_sizes/font_size = 60
+text = "Your mariage lives on !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 21.0
+offset_top = 396.0
+offset_right = 388.0
+offset_bottom = 538.0
+theme_override_constants/separation = 10
+
+[node name="Button Return" type="Button" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ntb60")
+theme_override_font_sizes/font_size = 35
+text = "Return to Level Selector"
+
+[node name="Button Quit" type="Button" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ntb60")
+theme_override_font_sizes/font_size = 35
+text = "Quit the Game
+"
+
+[connection signal="pressed" from="VBoxContainer2/Button Return" to="." method="_on_button_return_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Button Quit" to="." method="_on_button_quit_pressed"]

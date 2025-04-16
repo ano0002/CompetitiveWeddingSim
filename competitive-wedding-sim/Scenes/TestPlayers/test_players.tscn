@@ -230,3 +230,5 @@ texture = SubResource("CanvasTexture_n6hdu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldSettings"]
 environment = SubResource("Environment_f2txt")
+
+[connection signal="lvl_completed" from="TaskManager" to="." method="_on_win"]
