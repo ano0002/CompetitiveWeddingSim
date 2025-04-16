@@ -7,6 +7,7 @@
 script = ExtResource("2_p6h0s")
 
 [node name="BlocNote" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.270588)
 position = Vector2(125, 155)
 scale = Vector2(0.703125, 0.644531)
 texture = ExtResource("1_aknko")

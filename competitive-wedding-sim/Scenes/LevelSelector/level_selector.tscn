@@ -110,9 +110,9 @@ text = "Back"
 [node name="Button Level 1" type="Button" parent="."]
 layout_mode = 0
 offset_left = 99.0
-offset_top = 236.0
+offset_top = 234.0
 offset_right = 385.0
-offset_bottom = 348.0
+offset_bottom = 346.0
 theme_override_fonts/font = ExtResource("2_2db0o")
 theme_override_font_sizes/font_size = 40
 text = "Level 1"
