@@ -4187,7 +4187,7 @@ skeleton = NodePath("")
 
 [node name="MusicPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("28_cc4vl")
-volume_db = 12.06
+volume_db = 6.03
 autoplay = true
 
 [connection signal="body_entered" from="KitchenSink/InteractZone" to="KitchenSink" method="_on_body_entered"]

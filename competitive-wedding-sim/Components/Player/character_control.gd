@@ -3,10 +3,9 @@ extends CharacterBody3D
 @export var speed = 2.25
 @export var player_num = 1
 @export var dash_mult = 3.5
-
+@onready var footstep_player1 = $"FootStepPlayer/1"
 var dash_dir = Vector2(0, 0)
 var is_dashing = 0
-
 var can_interact = 0
 
 signal interact_signal(player_num)
@@ -26,6 +25,7 @@ func _init():
 	pass
 
 func _ready():
+	footstep_player1.autoplay = true
 	if player_num == 2:
 		get_node("character_model/1").hide()
 	player_model = get_node("character_model/" + str(player_num))
@@ -70,11 +70,14 @@ func _physics_process(_delta):
 		player_model.rotation.y = Vector2(velocity.x, -velocity.z).angle()+90
 		particle_generator.set_emitting(true)
 		particle_generator.set_amount_ratio(velocity.length()/(speed*dash_mult))
-
+		##if !footstep_player1.playing:
+		footstep_player1.volume_linear = 1
 	else:
 		particle_generator.set_emitting(false)
 		animation_player.play("idle")
-
+		footstep_player1.volume_linear = 0
+##if footstep_player1.playing:
+			 ##footstep_player1.stop()
 
 func _input(event):
 	if event.is_action_pressed("interact_"+str(player_num)):

@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://crsb80qye44v"]
+[gd_scene load_steps=9 format=3 uid="uid://crsb80qye44v"]
 
 [ext_resource type="Script" uid="uid://7afgcvdmbk0n" path="res://Components/Player/character_control.gd" id="1_6d8je"]
 [ext_resource type="PackedScene" uid="uid://7wnkn46upv5o" path="res://Assets/Characters/character-female-b.glb" id="2_4qqls"]
 [ext_resource type="PackedScene" uid="uid://be654a1tctso0" path="res://Assets/Characters/character-male-a.glb" id="3_4qqls"]
+[ext_resource type="AudioStream" uid="uid://ml4nad2rfgwl" path="res://Assets/Music/FX/Sound Effects - Walking on Wood Floor.mp3" id="4_7uyyc"]
+[ext_resource type="AudioStream" uid="uid://3tp148y0qorg" path="res://Assets/Music/FX/SFX_Footstep_Wood_2.wav" id="5_7uyyc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_n7csw"]
 height = 1.56445
@@ -48,3 +50,13 @@ draw_pass_1 = SubResource("SphereMesh_kne5a")
 
 [node name="PickUpDisplay" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.460266, 0)
+
+[node name="FootStepPlayer" type="Node3D" parent="."]
+
+[node name="1" type="AudioStreamPlayer3D" parent="FootStepPlayer"]
+stream = ExtResource("4_7uyyc")
+volume_db = 80.0
+autoplay = true
+
+[node name="2" type="AudioStreamPlayer3D" parent="FootStepPlayer"]
+stream = ExtResource("5_7uyyc")

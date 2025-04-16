@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ml4nad2rfgwl"
+path="res://.godot/imported/Sound Effects - Walking on Wood Floor.mp3-b675f47cd6379485452fdccb7f21cc8f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/FX/Sound Effects - Walking on Wood Floor.mp3"
+dest_files=["res://.godot/imported/Sound Effects - Walking on Wood Floor.mp3-b675f47cd6379485452fdccb7f21cc8f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
