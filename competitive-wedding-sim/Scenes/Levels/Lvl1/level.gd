@@ -18,5 +18,7 @@ func _on_timer_timeout():
 		get_tree().change_scene_to_file("res://Scenes/WinLoseUI/Lose_Menu.tscn")
 
 func _on_win():
+	global.current_level = "Lvl1"
 	global.temp_time = timer.time_left
 	get_tree().change_scene_to_file("res://Scenes/WinLoseUI/win_menu.tscn")
+	
