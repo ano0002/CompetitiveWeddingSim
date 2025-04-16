@@ -2,6 +2,10 @@ extends Control
 
 @onready var progress_bar = $ProgressBar
 
+func _on_ready() -> void:
+	%"Button Return".grab_focus()
+
+
 var max_time = 0
 
 func _on_button_return_pressed() -> void:

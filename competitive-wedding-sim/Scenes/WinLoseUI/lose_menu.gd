@@ -1,6 +1,7 @@
 extends Control
 
-
+func _on_ready() -> void:
+	$"VBoxContainer/Button Return".grab_focus()
 
 
 func _on_button_return_pressed() -> void:
